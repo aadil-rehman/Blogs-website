@@ -1,0 +1,56 @@
+<%- include partials/header %>
+    <div class="homebody">
+        <img src="/images/blog.jpg" alt="persnal">
+    </div>
+
+    <div class="postGallery">
+        <div class="postGallery2">
+            <div class="postGalleryContent">
+                <div class="postbody">
+                    <% posts.forEach(function(post) { %>
+
+                        <h1>
+                            <a id="blogTitle" href="/posts/<%= post.title%>">
+                                <%= post.title %>
+                            </a>
+
+
+                        </h1>
+
+                        <p>
+
+                        <div class="post">
+
+                            <div class="extradiv">
+                                <hr width="95%">
+                                <% if (post.contentBody.length> 360) { %>
+                                    <div class="postContent">
+
+                                        <%= post.contentBody.substring(0, 360) %>
+                                    </div>
+                            </div>
+                            <div class="postGalleryImg">
+                                <a href="/posts">
+                                    <img src="/images/read.png" width="40px" height="40px" />
+                                </a>
+                            </div>
+                        </div>
+                        <% } else { %>
+
+                            <div class="postElseContent">
+
+                                <%= post.contentBody %>
+                            </div>
+                            <% } %>
+                                </p>
+
+                                <% }) %>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <%- include partials/footer %>

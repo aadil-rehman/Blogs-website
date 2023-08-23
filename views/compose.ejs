@@ -1,0 +1,18 @@
+<%- include partials/header %>
+
+    <h1>Compose</h1>
+    <!-- //We have applied bootstrap style in below for.....by giving the bootstrap classes-->
+    <form action="/compose" method="post">
+        <div class="form-group">
+            <label>Title</label>
+            <input class="form-control" type="text" name="titleText">
+            <label>Post</label>
+            <textarea class="form-control" name="postText" cols="40" rows="5"></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit" name="composeButton">Publish</button>
+    </form>
+
+
+
+
+    <%- include partials/footer %>

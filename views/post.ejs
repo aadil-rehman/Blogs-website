@@ -1,0 +1,10 @@
+<%- include partials/header %>
+
+<h1><%= post.title %></h1>
+    <p>
+        <%= post.contentBody %>
+    </p>
+
+<button data-postid = "<%= post.id %>" class="btn btn-danger" id="deleteButton" type="button"> Delete</button>
+
+<%- include partials/footer %>

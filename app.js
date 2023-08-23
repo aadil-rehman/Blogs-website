@@ -7,6 +7,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const _ = require("lodash");
+const methodOverride = require('method-override');
 const mongoose = require("mongoose");
 
 const environment = process.env.NODE_ENV; // 1. development 2. test 3. production
@@ -45,7 +46,7 @@ app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
-
+app.use(methodOverride('_method'));
 
 app.get("/", async (req, res) => {
 const posts = await Post.find({});

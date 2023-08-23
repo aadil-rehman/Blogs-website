@@ -4,7 +4,8 @@
     <p>
         <%= post.contentBody %>
     </p>
-
-<button data-postid = "<%= post.id %>" class="btn btn-danger" id="deleteButton" type="button"> Delete</button>
+<form action="/posts/<%= post.id %>?_method=DELETE" method="POST">
+    <button class="btn btn-danger" id="deleteButton" type="submit">Delete</button>
+</form>
 
 <%- include partials/footer %>

@@ -79,7 +79,7 @@ body{
     margin-bottom: 40px;
 }
 .postContent {
-    width: 800px;
+    max-width: 100vh;
     background: linear-gradient(to right, #000, #fff);
    -webkit-background-clip: text;
    -webkit-text-fill-color: transparent;

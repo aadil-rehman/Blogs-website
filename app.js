@@ -1,12 +1,15 @@
 //jshint esversion:6
-
+const dotenv = require('dotenv');
+dotenv.config({
+  path: "./.env"
+})
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const _ = require("lodash");
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://127.0.0.1:27017/blogsDB", {useNewUrlParser : true}).then(console.log("Connected to MongoDB"));
+mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser : true}).then(console.log("Connected to MongoDB"));
 
 const postSchema = new mongoose.Schema({
   title : String,

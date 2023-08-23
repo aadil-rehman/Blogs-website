@@ -9,11 +9,16 @@ const ejs = require("ejs");
 const _ = require("lodash");
 const mongoose = require("mongoose");
 
-mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser : true}).then(console.log("Connected to MongoDB"));
+const environment = process.env.NODE_ENV; // 1. development 2. test 3. production
+
+const DB_URL = process.env.NODE_ENV === "production" ? process.env.DATABASE_URL : "mongodb://127.0.0.1:27017/blogsDB"
+
+mongoose.connect(DB_URL, {useNewUrlParser : true}).then(console.log("Connected to MongoDB"));
 
 const postSchema = new mongoose.Schema({
   title : String,
-  contentBody : String
+  contentBody : String,
+  slug: String
 })
 
 const Post = mongoose.model("Post", postSchema);
@@ -81,10 +86,17 @@ app.get("/register", (req, res) => {
 // })
 
 app.post("/compose", async (req, res) => {
-  
+  // 1. All lower case slug
+  // 2. All spaces replaced with -
+  // 3. append a random 4 digit number at the end of the slug
+  const random4DigitNumber = Math.floor(1000 + Math.random() * 9000);
+  const slug = req.body.titleText.toLowerCase().replaceAll(" ", "-") + "-" + random4DigitNumber;
+
+
   const postData = new Post ({
     title : req.body.titleText,
-    contentBody : req.body.postText
+    contentBody : req.body.postText,
+    slug: slug
   });
   
   // posts.push(postData);
@@ -92,24 +104,12 @@ app.post("/compose", async (req, res) => {
   res.redirect("/");
 })
 
-app.get("/posts/:postName", async (req, res) => {
-  const reqestedTitle = _.lowerCase(req.params.postName);
+app.get("/posts/:slug", async (req, res) => {
   
-  const posts = await Post.find({});
-
-  posts.forEach(function(post) {
-    const storedTitle = _.lowerCase(post.title);
-    // console.log(storedTitle);
-    
-    if(reqestedTitle === storedTitle) {
-      res.render("post", {
-        // title : post.title,
-        // content : post.contentBody
-        post
-      })
-    } 
-  })
   
+  const post = await Post.findOne({slug: req.params.slug});
+  console.log(post)
+  res.render("post", {post})
 })
 
 //api to delete the blog post

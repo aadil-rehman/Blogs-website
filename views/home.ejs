@@ -10,7 +10,7 @@
                     <% posts.forEach(function(post) { %>
 
                         <h1>
-                            <a id="blogTitle" href="/posts/<%= post.title%>">
+                            <a id="blogTitle" href="/posts/<%= post.slug%>">
                                 <%= post.title %>
                             </a>
 
@@ -30,7 +30,7 @@
                                     </div>
                             </div>
                             <div class="postGalleryImg">
-                                <a href="/posts">
+                                <a href="/posts/<%= post.slug %>">
                                     <img src="/images/read.png" width="40px" height="40px" />
                                 </a>
                             </div>

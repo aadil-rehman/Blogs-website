@@ -115,17 +115,10 @@ app.get("/posts/:slug", async (req, res) => {
 //api to delete the blog post
 app.delete("/posts/:id", async (req, res) => {
     const postID = req.params.id;
-    try {
        const deleted = await Post.findByIdAndDelete({
         _id : postID
        });
-       res.json(deleted);
-    } catch (error) {
-       res.json({
-        Error : "Could not deleted the post"
-       })
-    }
-    console.log(postID);
+      res.redirect('/')
 })
 
 app.listen(3000, function() {
